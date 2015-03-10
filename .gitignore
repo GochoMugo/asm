@@ -10,5 +10,8 @@
 # except our Readme file
 !Readme.md
 
+# except our License file
+!LICENSE
+
 # except our .asm files
 !*.asm
