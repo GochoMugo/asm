@@ -17,29 +17,30 @@
 #
 
 .section .data
-  numbers:
+  numbers: # a list of long integers
     .long 10, 20, 2, 3, 56, 21, 34, 0
 
-.section .text
 
-  .globl _start
+.section .text
+  .globl _start # marks the start of program
 
   _start:
-    movl $0, %edi
-    movl numbers(, %edi, 4), %eax
-    movl %eax, %ebx
-    jmp loop
+    movl $0, %edi # 1st index of the list
+    movl numbers(, %edi, 4), %eax # examining the 1st number
+    movl %eax, %ebx # assume this 1st number is the largest
+    jmp loop # start looping through the list
 
   loop:
-    cmpl $0, %eax
-    je loop_end
-    incl %edi
-    movl numbers(, %edi, 4), %eax
-    cmpl %ebx, %eax
-    jle loop
-    movl %eax, %ebx
-    jmp loop
+    cmpl $0, %eax # check if the number being inspected is zero
+    je loop_end # get out of this loop, if it was equal to zero
+    incl %edi # increment the index of the list
+    movl numbers(, %edi, 4), %eax # load the next number to inspect
+    cmpl %ebx, %eax # compare the current largest no. and the no.
+      # being inspected
+    jle loop # continue to the next iteration if it is less or equal
+    movl %eax, %ebx # number being inspected is larger so move it
+    jmp loop # go to the next iteration
 
   loop_end:
-    movl $1, %eax
-    int $0x80
+    movl $1, %eax # exit system call
+    int $0x80 # raise interrupt
