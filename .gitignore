@@ -8,7 +8,7 @@
 !Makefile
 
 # except our Readme file
-!Readme.md
+!README.md
 
 # except our License file
 !LICENSE
